@@ -74,12 +74,12 @@ const guideList: TeamProps[] = [
     socialNetworks: [
       {
         name: "Linkedin",
-        url: "https://www.linkedin.com/in/pratiksha-sarma/",
+        url: "https://www.linkedin.com/in/kishore-kashyap/",
       },
-      {
-        name: "Instagram",
-        url: "https://www.instagram.com/pratiksha__sarma/",
-      },
+      // {
+      //   name: "Instagram",
+      //   url: "https://www.instagram.com/",
+      // },
     ],
   },
 ];
