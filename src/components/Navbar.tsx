@@ -1,4 +1,3 @@
-<<<<<<< HEAD:frontend/src/components/Navbar.tsx
 import { useState } from "react";
 import {
   NavigationMenu,
