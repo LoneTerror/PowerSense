@@ -23,7 +23,7 @@ interface SociaNetworkslProps {
 
 const teamList: TeamProps[] = [
   {
-    imageUrl: "https://github.com/shadcn.png",
+    imageUrl: "https://i.imgur.com/xF8Tvdp.jpeg",
     name: "Pratiksha Sarma",
     position: "FullStack Developer",
     socialNetworks: [
@@ -38,7 +38,7 @@ const teamList: TeamProps[] = [
     ],
   },
   {
-    imageUrl: "https://github.com/shadcn.png",
+    imageUrl: "https://i.imgur.com/67TOjRa.png",
     name: "Prasun Chakraborty",
     position: "FullStack Developer",
     socialNetworks: [
