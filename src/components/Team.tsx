@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Mail, Github, Instagram, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin } from "lucide-react";
 
 interface TeamProps {
   imageUrl: string;
