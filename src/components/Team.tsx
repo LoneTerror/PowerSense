@@ -68,7 +68,7 @@ const teamList: TeamProps[] = [
 
 const guideList: TeamProps[] = [
   {
-    imageUrl: "https://i.postimg.cc/mkCJZPbX/Pratiksha.jpg",
+    imageUrl: "https://i.imgur.com/4CIsZwR.jpeg",
     name: "Prof. Kishore Kashyap",
     position: "MTech (Gauhati), PhD (Gauhati)",
     socialNetworks: [
