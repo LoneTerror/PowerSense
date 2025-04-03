@@ -32,7 +32,7 @@ export const HeroCards = () => {
           </div>
         </CardHeader>
 
-        <CardContent>This landing page is awesome!</CardContent>
+        <CardContent>PowerSense is awesome!</CardContent>
       </Card>
 
       {/* Team */}
@@ -58,7 +58,7 @@ export const HeroCards = () => {
 
         <CardFooter>
           <div>
-            <a
+            {/* <a
               rel="noreferrer noopener"
               href="https://github.com/LoneTerror"
               target="_blank"
@@ -69,7 +69,7 @@ export const HeroCards = () => {
             >
               <span className="sr-only">Github icon</span>
               <GitHubLogoIcon className="w-5 h-5" />
-            </a>
+            </a> */}
             {/* <a
               rel="noreferrer noopener"
               href="https://twitter.com/"
@@ -91,7 +91,7 @@ export const HeroCards = () => {
               </svg>
             </a> */}
 
-            <a
+            {/* <a
               rel="noreferrer noopener"
               href="https://www.linkedin.com/in/prasun-chakraborty-287246257/"
               target="_blank"
@@ -102,7 +102,7 @@ export const HeroCards = () => {
             >
               <span className="sr-only">Linkedin icon</span>
               <Linkedin size="20" />
-            </a>
+            </a> */}
           </div>
         </CardFooter>
       </Card>

@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Github, Instagram, Linkedin } from "lucide-react";
+import { Mail, Github, Instagram, Linkedin } from "lucide-react";
 
 interface TeamProps {
   imageUrl: string;
@@ -36,8 +36,8 @@ const teamList: TeamProps[] = [
         url: "https://www.linkedin.com/in/pratiksha-sarma/",
       },
       {
-        name: "Instagram",
-        url: "https://www.instagram.com/pratiksha__sarma/",
+        name: "Mail",
+        url: "https://gmail.com",
       },
     ],
   },
@@ -55,8 +55,8 @@ const teamList: TeamProps[] = [
         url: "https://www.linkedin.com/in/prasun-chakraborty-287246257/",
       },
       {
-        name: "Instagram",
-        url: "https://www.instagram.com/loneterrorx/",
+        name: "Mail",
+        url: "https://mail.google.com/mail/#inbox?compose=GTvVlcSGMhgHDJFkpnJXJSkzPPccsbrVwvgXkbThhnXNHDmRTJkmlqDbqwSlSwVBqZbLbJbVzKxWT",
       },
     ],
   },
@@ -76,10 +76,10 @@ const guideList: TeamProps[] = [
         name: "Linkedin",
         url: "https://www.linkedin.com/in/kishore-kashyap/",
       },
-      // {
-      //   name: "Instagram",
-      //   url: "https://www.instagram.com/",
-      // },
+      {
+        name: "Mail",
+        url: "https://gmail.com",
+      },
     ],
   },
 ];
@@ -93,8 +93,8 @@ export const Team = () => {
       case "Github":
         return <Github size="20" />;
 
-      case "Instagram":
-        return <Instagram size="20" />;
+      case "Mail":
+        return <Mail size="20" />;
     }
   };
 
