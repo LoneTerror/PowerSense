@@ -30,7 +30,7 @@ const features: FeatureProps[] = [
     image: image3,
   },
   {
-    title: "AI-Powered Appliance Usage Analysis",
+    title: "AI-Powered Usage Analysis",
     description:
       "Uses machine learning to analyze historical data and identify patterns in appliance usage. Learns the typical energy consumption profile of each appliance.",
     image: image,
