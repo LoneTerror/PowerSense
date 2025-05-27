@@ -23,7 +23,7 @@ export interface DataPoint {
 }
 
 // Mock API endpoint
-const API_ENDPOINT = '/api/dashboard';
+// const API_ENDPOINT = '/api/dashboard';
 
 // Function to fetch dashboard metrics from the backend
 export const fetchDashboardMetrics = async (): Promise<DashboardMetrics> => {

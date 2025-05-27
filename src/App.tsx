@@ -1,3 +1,5 @@
+// App.tsx
+import { Routes, Route } from "react-router-dom";
 import { About } from "./components/About";
 import { Cta } from "./components/Cta";
 import { FAQ } from "./components/FAQ";
@@ -8,20 +10,18 @@ import { HowItWorks } from "./components/HowItWorks";
 import { Navbar } from "./components/Navbar";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Services } from "./components/Services";
-import { Sponsors } from "./components/Sponsors";
+//import { Sponsors } from "./components/Sponsors";
 import { Team } from "./components/Team";
 import { Testimonials } from "./components/Testimonials";
-import Dashboard from './components/Dashboard/components/Dashboard';
+import Dashboard from "./components/Dashboard/components/Dashboard";
 import { DataProvider } from "./components/Dashboard/context/DataContext";
 
 import "./App.css";
 
-function App() {
+function LandingPage() {
   return (
     <>
-      <Navbar />
       <Hero />
-      <Sponsors />
       <About />
       <HowItWorks />
       <Features />
@@ -32,9 +32,25 @@ function App() {
       <FAQ />
       <Footer />
       <ScrollToTop />
-      <DataProvider>
-        <Dashboard />
-      </DataProvider>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route
+          path="/dashboard"
+          element={
+            <DataProvider>
+              <Dashboard />
+            </DataProvider>
+          }
+        />
+      </Routes>
     </>
   );
 }
