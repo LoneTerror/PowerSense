@@ -11,6 +11,9 @@ import { Services } from "./components/Services";
 import { Sponsors } from "./components/Sponsors";
 import { Team } from "./components/Team";
 import { Testimonials } from "./components/Testimonials";
+import Dashboard from './components/Dashboard/components/Dashboard';
+import { DataProvider } from "./components/Dashboard/context/DataContext";
+
 import "./App.css";
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
       <FAQ />
       <Footer />
       <ScrollToTop />
+      <DataProvider>
+        <Dashboard />
+      </DataProvider>
     </>
   );
 }
