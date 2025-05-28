@@ -1,9 +1,11 @@
+// src/components/Dashboard/components/GaugeCard.tsx
+
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 interface GaugeCardProps {
   title: string;
-  value: number;
+  value: number | null | undefined; // IMPORTANT: Allow value to be null or undefined
   maxValue: number;
   suffix?: string;
   color: string;
@@ -17,8 +19,12 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
   color,
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Use a safe value for calculations and display. Default to 0 if value is null or undefined.
+  const safeValue = value ?? 0;
+
   // Calculate the percentage of the gauge filled, capping at 100%
-  const percentage = Math.min(100, (value / maxValue) * 100);
+  const percentage = Math.min(100, (safeValue / maxValue) * 100);
 
   /**
    * Determines the Tailwind CSS text color class based on the color prop.
@@ -112,7 +118,7 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
     ctx.arc(centerX, centerY, radius - 15, 0, 2 * Math.PI); // Smaller circle inside
     ctx.fillStyle = 'rgba(30, 41, 59, 0.6)'; // Semi-transparent dark fill
     ctx.fill();
-  }, [value, maxValue, color, percentage]); // Redraw when these props change
+  }, [safeValue, maxValue, color, percentage]); // Redraw when these props change (use safeValue)
 
   return (
     <motion.div
@@ -132,7 +138,7 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
       {/* Value and suffix displayed below the gauge */}
       <div className="mt-4 flex items-baseline gap-1">
         <span className={`text-3xl font-bold ${getColorClass()}`}>
-          {value.toFixed(1)} {/* Display value formatted to one decimal place */}
+          {safeValue.toFixed(1)} {/* Use safeValue here to prevent 'toFixed' on undefined */}
         </span>
         <span className="text-text-secondary text-sm">{suffix}</span>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { LayoutGrid, RefreshCw } from 'lucide-react'; // Import RefreshCw icon
+import { LayoutGrid, RefreshCw } from "lucide-react"; // Import RefreshCw icon
 import { useDataContext } from '../context/DataContext'; // Ensure correct path
 import GaugeCard from './GaugeCard'; // Ensure correct path
 import GraphCard from './GraphCard'; // Ensure correct path
