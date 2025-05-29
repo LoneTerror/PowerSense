@@ -1,9 +1,10 @@
 // src/components/Dashboard/context/DataContext.tsx
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { fetchSensorData, SensorDataResponse } from '../services/dashboardService'; // Import the service to fetch real data
+import { fetchSensorData, SensorDataResponse } from '../services/dashboardService'; // Existing import
+import { fetchSpecificAveragePower } from '../services/powerConsumptionService'; // NEW: Import the new service
 
-// Define the Metrics interface to match the data structure from your backend
+// Define the Metrics interface (EXISTING - NO CHANGES HERE for existing metrics)
 interface Metrics {
   current: number;
   avgCurrent: number;
@@ -17,15 +18,20 @@ interface Metrics {
   powerHistory: { timestamp: string; value: number; }[];
 }
 
-// Define the shape of the context object
+// Define the shape of the context object (MODIFIED)
 interface DataContextType {
   metrics: Metrics;
   loading: boolean;
-  error: string | null; // Added to handle and display any data fetching errors
-  refreshData: (intervalHours?: number) => void; // Function to trigger data refresh
+  error: string | null;
+  refreshData: (intervalHours?: number) => void; // Existing function
+  // NEW: States and function for specific average power consumption
+  specificAvgPower: number;
+  specificAvgPowerLoading: boolean;
+  specificAvgPowerError: string | null;
+  refreshSpecificAvgPower: (periodMinutes?: number) => void;
 }
 
-// Initial state for metrics before any data is loaded
+// Initial state for metrics (EXISTING - NO CHANGES HERE for existing metrics)
 const initialMetrics: Metrics = {
   current: 0,
   avgCurrent: 0,
@@ -41,9 +47,14 @@ const initialMetrics: Metrics = {
 // Create the React Context
 const DataContext = createContext<DataContextType>({
   metrics: initialMetrics,
-  loading: true, // Initially true as data will be loading
-  error: null,   // No error initially
-  refreshData: () => {} // Placeholder function
+  loading: true,
+  error: null,
+  refreshData: () => {},
+  // NEW: Initial values for specific average power
+  specificAvgPower: 0,
+  specificAvgPowerLoading: true,
+  specificAvgPowerError: null,
+  refreshSpecificAvgPower: () => {},
 });
 
 // Custom hook for convenient consumption of the DataContext
@@ -54,51 +65,89 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [metrics, setMetrics] = useState<Metrics>(initialMetrics);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  // State to track the currently selected interval for historical data, default to 24 hours
   const [currentInterval, setCurrentInterval] = useState<number>(24);
 
+  // NEW: States for specific average power consumption
+  const [specificAvgPower, setSpecificAvgPower] = useState<number>(0);
+  const [specificAvgPowerLoading, setSpecificAvgPowerLoading] = useState<boolean>(true);
+  const [specificAvgPowerError, setSpecificAvgPowerError] = useState<string | null>(null);
+  const [currentSpecificAvgPeriod, setCurrentSpecificAvgPeriod] = useState<number>(5); // Default to 5 minutes
+
   /**
-   * Function to fetch and refresh the sensor data from the backend.
-   * It updates the loading, error, and metrics states.
-   * @param intervalHours Optional. The number of hours for historical data to fetch.
-   * If not provided, uses the currentInterval state.
+   * Function to fetch and refresh the sensor data from the backend (EXISTING).
    */
   const refreshData = async (intervalHours: number = currentInterval) => {
-    setLoading(true); // Set loading to true when fetching starts
-    setError(null);   // Clear any previous errors
-    setCurrentInterval(intervalHours); // Update the interval state
+    setLoading(true);
+    setError(null);
+    setCurrentInterval(intervalHours);
 
     try {
-      // Call the fetchSensorData function from your dashboardService
       const newData: SensorDataResponse = await fetchSensorData(intervalHours);
-      setMetrics(newData); // Update metrics with fetched data
+      setMetrics(newData);
     } catch (err: any) {
       console.error("Failed to refresh data:", err);
-      // Set error state if fetching fails
       setError(err.message || "An unknown error occurred while fetching data.");
-      // Optionally reset metrics or show a fallback if data fetch fails
       setMetrics(initialMetrics);
     } finally {
-      setLoading(false); // Set loading to false once fetching is complete (success or failure)
+      setLoading(false);
     }
   };
 
-  // useEffect hook to handle initial data load and periodic refreshing
+  /**
+   * NEW: Function to fetch and refresh the specific average power consumption.
+   * @param periodMinutes Optional. The number of minutes for the average calculation.
+   */
+  const refreshSpecificAvgPower = async (periodMinutes: number = currentSpecificAvgPeriod) => {
+    setSpecificAvgPowerLoading(true);
+    setSpecificAvgPowerError(null);
+    setCurrentSpecificAvgPeriod(periodMinutes); // Update the state with the new period
+
+    try {
+      const avgPower = await fetchSpecificAveragePower(periodMinutes);
+      setSpecificAvgPower(avgPower);
+    } catch (err: any) {
+      console.error("Failed to refresh specific average power:", err);
+      setSpecificAvgPowerError(err.message || "An unknown error occurred while fetching specific average power.");
+      setSpecificAvgPower(0); // Reset or show default on error
+    } finally {
+      setSpecificAvgPowerLoading(false);
+    }
+  };
+
+  // useEffect hook to handle initial data load and periodic refreshing for main dashboard metrics
   useEffect(() => {
-    // 1. Initial data load
-    refreshData(currentInterval);
+    refreshData(currentInterval); // Initial load
 
-    // 2. Set up an interval to refresh data periodically (e.g., every 30 seconds)
     const intervalId = setInterval(() => {
-      refreshData(currentInterval); // Refresh using the currently selected interval
-    }, 2000); // Refreshes every 2 seconds (adjust as needed for your sensor data update rate)
+      refreshData(currentInterval);
+    }, 2000);
 
-    // 3. Cleanup function: Clear the interval when the component unmounts or dependencies change
     return () => clearInterval(intervalId);
-  }, [currentInterval]); // Dependency array: Effect re-runs if currentInterval changes
+  }, [currentInterval]); // Only re-run if currentInterval changes
+
+  // NEW: useEffect hook for the specific average power consumption
+  useEffect(() => {
+    refreshSpecificAvgPower(currentSpecificAvgPeriod); // Initial load for specific average
+
+    const avgIntervalId = setInterval(() => {
+      refreshSpecificAvgPower(currentSpecificAvgPeriod);
+    }, 2000); // Refresh every 2 seconds (adjust as needed)
+
+    return () => clearInterval(avgIntervalId);
+  }, [currentSpecificAvgPeriod]); // Only re-run if currentSpecificAvgPeriod changes
 
   return (
-    <DataContext.Provider value={{ metrics, loading, error, refreshData }}>
+    <DataContext.Provider value={{
+      metrics,
+      loading,
+      error,
+      refreshData,
+      // NEW: Provide specific average power states and function
+      specificAvgPower,
+      specificAvgPowerLoading,
+      specificAvgPowerError,
+      refreshSpecificAvgPower
+    }}>
       {children}
     </DataContext.Provider>
   );
