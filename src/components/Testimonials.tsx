@@ -17,42 +17,42 @@ interface TestimonialProps {
 const testimonials: TestimonialProps[] = [
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Aisha Sharma",
-    userName: "@aisha_sharma",
+    name: "Anilabh Barua",
+    userName: "@devilsbell",
     comment: "PowerSense has completely transformed how I view my electricity consumption. The real-time data is incredibly insightful!",
   },
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Rohan Patel",
-    userName: "@rohan_p",
+    name: "Midanka Lahon",
+    userName: "@R786",
     comment:
       "I was skeptical, but PowerSense genuinely helped me identify energy-wasting appliances. My bills have seen a noticeable drop!",
   },
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Priya Singh",
-    userName: "@priya_singh_e",
+    name: "Rishikesh Verma",
+    userName: "@r_verma",
     comment:
       "The dashboard is so user-friendly and easy to understand. I love being able to see my historical data and make informed decisions.",
   },
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Vikram Kumar",
-    userName: "@vikram_tech",
+    name: "Jimmy",
+    userName: "@jimmy1327",
     comment:
       "Knowing the estimated cost per kWh is a game-changer for budgeting. This is an essential tool for smart homes.",
   },
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Sara Khan",
-    userName: "@sara_k",
+    name: "Rupinder Singh",
+    userName: "@r_singh",
     comment:
       "Excellent support and a truly effective product. It's empowering to have such detailed control over my energy use.",
   },
   {
     image: "https://github.com/shadcn.png", // Placeholder image
-    name: "Deepak Choudhary",
-    userName: "@deepak_c",
+    name: "Alexei",
+    userName: "@alexei",
     comment:
       "The average consumption metrics are very helpful for understanding trends. Highly recommend PowerSense to everyone!",
   },
