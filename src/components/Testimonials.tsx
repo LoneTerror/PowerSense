@@ -45,7 +45,7 @@ const testimonials: TestimonialProps[] = [
   {
     image: "https://github.com/shadcn.png", // Placeholder image
     name: "Rupinder Singh",
-    userName: "@r_singh",
+    userName: "@error69",
     comment:
       "Excellent support and a truly effective product. It's empowering to have such detailed control over my energy use.",
   },
