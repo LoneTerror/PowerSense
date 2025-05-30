@@ -246,7 +246,7 @@ const Dashboard: React.FC = () => {
           </span>
         </p>
         {specificAvgPowerError && (
-          <p className="text-red-500 text-sm mt-2">Error calculating cost: {specificAvgPowerError}</p>
+          <p className="text-red-500 text-sm mt-2">Error calculating cost: {specificAvgPowerError} (Check Backend Service)</p>
         )}
       </motion.div>
 

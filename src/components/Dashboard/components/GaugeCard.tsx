@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { Loader2 } from 'lucide-react'; // Import Loader2 for a spinner icon
 
 interface GaugeCardProps {
   title: string;
@@ -9,6 +10,8 @@ interface GaugeCardProps {
   maxValue: number;
   suffix?: string;
   color: string;
+  isLoading?: boolean; // Added isLoading prop
+  error?: string | null; // Added error prop
 }
 
 const GaugeCard: React.FC<GaugeCardProps> = ({
@@ -17,6 +20,8 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
   maxValue,
   suffix = '',
   color,
+  isLoading = false, // Default to false
+  error = null,      // Default to null
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -42,6 +47,8 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
         return 'text-accent-warning';
       case 'text-accent-danger':
         return 'text-accent-danger';
+      case 'text-indigo-500': // Added for the new Avg Consumption card
+        return 'text-indigo-500';
       default:
         return 'text-accent-primary';
     }
@@ -58,6 +65,7 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
       case 'text-accent-success': return '#10b981'; // Green
       case 'text-accent-warning': return '#f59e0b'; // Orange
       case 'text-accent-danger': return '#ef4444'; // Red
+      case 'text-indigo-500': return '#6366f1'; // Indigo for Avg Consumption
       default: return '#3b82f6';
     }
   };
@@ -69,6 +77,12 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
 
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+
+    // Only draw the gauge if not loading and no error
+    if (isLoading || error) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas if showing loading/error
+      return;
+    }
 
     // Adjust for device pixel ratio to ensure crisp rendering on high-DPI screens
     const dpr = window.devicePixelRatio || 1;
@@ -118,29 +132,44 @@ const GaugeCard: React.FC<GaugeCardProps> = ({
     ctx.arc(centerX, centerY, radius - 15, 0, 2 * Math.PI); // Smaller circle inside
     ctx.fillStyle = 'rgba(30, 41, 59, 0.6)'; // Semi-transparent dark fill
     ctx.fill();
-  }, [safeValue, maxValue, color, percentage]); // Redraw when these props change (use safeValue)
+  }, [safeValue, maxValue, color, percentage, isLoading, error]); // Redraw when these props change (use safeValue)
 
   return (
     <motion.div
       initial={{ scale: 0.95, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="dashboard-card flex flex-col items-center"
+      className="dashboard-card flex flex-col items-center p-4 bg-gray-800 rounded-lg shadow-md" // Added some basic styling
     >
-      <h3 className="text-lg font-semibold mb-2">{title}</h3>
-      <div className="relative w-full h-40 gauge-container">
-        <canvas
-          ref={canvasRef}
-          className="w-full h-full"
-          style={{ width: '100%', height: '100%' }} // Ensure canvas fills its container
-        ></canvas>
-      </div>
-      {/* Value and suffix displayed below the gauge */}
-      <div className="mt-4 flex items-baseline gap-1">
-        <span className={`text-3xl font-bold ${getColorClass()}`}>
-          {safeValue.toFixed(1)} {/* Use safeValue here to prevent 'toFixed' on undefined */}
-        </span>
-        <span className="text-text-secondary text-sm">{suffix}</span>
+      <h3 className="text-lg font-semibold mb-2 text-white">{title}</h3>
+      <div className="relative w-full h-40 flex items-center justify-center"> {/* Centered content */}
+        {isLoading ? (
+          <div className="flex flex-col items-center text-accent-primary">
+            <Loader2 className="h-8 w-8 animate-spin" />
+            <p className="mt-2 text-sm text-gray-400">Loading...</p>
+          </div>
+        ) : error ? (
+          <div className="text-red-500 text-center p-2 text-sm">
+            <p>Error:</p>
+            <p>{error}</p>
+            <p>Backend Process is in Shutdown State</p>
+          </div>
+        ) : (
+          <>
+            <canvas
+              ref={canvasRef}
+              className="w-full h-full absolute top-0 left-0" // Absolute positioning for canvas
+              style={{ width: '100%', height: '100%' }} // Ensure canvas fills its container
+            ></canvas>
+            {/* Value and suffix displayed on top of the gauge */}
+            <div className="absolute bottom-1/4 flex items-baseline gap-1"> {/* Adjusted position */}
+              <span className={`text-3xl font-bold ${getColorClass()}`}>
+                {safeValue.toFixed(1)} {/* Use safeValue here to prevent 'toFixed' on undefined */}
+              </span>
+              <span className="text-gray-400 text-sm">{suffix}</span>
+            </div>
+          </>
+        )}
       </div>
     </motion.div>
   );

@@ -25,7 +25,7 @@ const teamList: TeamProps[] = [
   {
     imageUrl: "https://i.postimg.cc/mkCJZPbX/Pratiksha.jpg",
     name: "Pratiksha Sarma",
-    position: "FullStack Developer",
+    position: "BTech - IT | Gauhati University",
     socialNetworks: [
       {
         name: "Github",
@@ -44,7 +44,7 @@ const teamList: TeamProps[] = [
   {
     imageUrl: "https://i.postimg.cc/XNCTkzwf/Prasun.png",
     name: "Prasun Chakraborty",
-    position: "FullStack Developer",
+    position: "BTech - IT | Gauhati University",
     socialNetworks: [
       {
         name: "Github",
@@ -56,7 +56,7 @@ const teamList: TeamProps[] = [
       },
       {
         name: "Mail",
-        url: "https://mail.google.com/mail/#inbox?compose=GTvVlcSGMhgHDJFkpnJXJSkzPPccsbrVwvgXkbThhnXNHDmRTJkmlqDbqwSlSwVBqZbLbJbVzKxWT",
+        url: "mailto:nothingshere21@gmail.com",
       },
     ],
   },
@@ -70,7 +70,7 @@ const guideList: TeamProps[] = [
   {
     imageUrl: "https://i.imgur.com/4CIsZwR.jpeg",
     name: "Dr. Kishore Kashyap",
-    position: "MTech (Gauhati), PhD (Gauhati)",
+    position: "Assistant Professor, Dept of IT | GU",
     socialNetworks: [
       {
         name: "Linkedin",
