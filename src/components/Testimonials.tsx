@@ -16,46 +16,45 @@ interface TestimonialProps {
 
 const testimonials: TestimonialProps[] = [
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe",
-    comment: "This landing page is awesome!",
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Aisha Sharma",
+    userName: "@aisha_sharma",
+    comment: "PowerSense has completely transformed how I view my electricity consumption. The real-time data is incredibly insightful!",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe1",
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Rohan Patel",
+    userName: "@rohan_p",
     comment:
-      "Lorem ipsum dolor sit amet,empor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
-  },
-
-  {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe2",
-    comment:
-      "Lorem ipsum dolor sit amet,exercitation. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
+      "I was skeptical, but PowerSense genuinely helped me identify energy-wasting appliances. My bills have seen a noticeable drop!",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe3",
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Priya Singh",
+    userName: "@priya_singh_e",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+      "The dashboard is so user-friendly and easy to understand. I love being able to see my historical data and make informed decisions.",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe4",
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Vikram Kumar",
+    userName: "@vikram_tech",
     comment:
-      "Lorem ipsum dolor sit amet, tempor incididunt  aliqua. Ut enim ad minim veniam, quis nostrud.",
+      "Knowing the estimated cost per kWh is a game-changer for budgeting. This is an essential tool for smart homes.",
   },
   {
-    image: "https://github.com/shadcn.png",
-    name: "John Doe React",
-    userName: "@john_Doe5",
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Sara Khan",
+    userName: "@sara_k",
     comment:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Excellent support and a truly effective product. It's empowering to have such detailed control over my energy use.",
+  },
+  {
+    image: "https://github.com/shadcn.png", // Placeholder image
+    name: "Deepak Choudhary",
+    userName: "@deepak_c",
+    comment:
+      "The average consumption metrics are very helpful for understanding trends. Highly recommend PowerSense to everyone!",
   },
 ];
 
@@ -68,7 +67,7 @@ export const Testimonials = () => {
       <h2 className="text-3xl md:text-4xl font-bold">
         Customer
         {" "}
-        <span className="bg-gradient-to-r from-[#79c5bf]  to-[#b183db] text-transparent bg-clip-text">
+        <span className="bg-gradient-to-r from-[#79c5bf] to-[#b183db] text-transparent bg-clip-text">
           Feedback
         </span>
       </h2>
@@ -79,7 +78,7 @@ export const Testimonials = () => {
       </p> */}
       {""}
 
-      <div className="py-12 grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
+      <div className="py-12 grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2 lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
         {testimonials.map(
           ({ image, name, userName, comment }: TestimonialProps) => (
             <Card

@@ -1,37 +1,32 @@
 // src/components/Dashboard/context/DataContext.tsx
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { fetchSensorData, SensorDataResponse } from '../services/dashboardService'; // Existing import
-import { fetchSpecificAveragePower } from '../services/powerConsumptionService'; // NEW: Import the new service
+import { fetchSensorData, SensorDataResponse } from '../services/dashboardService';
+import { fetchSpecificAveragePower } from '../services/powerConsumptionService';
 
-// Define the Metrics interface (EXISTING - NO CHANGES HERE for existing metrics)
 interface Metrics {
   current: number;
   avgCurrent: number;
   voltage: number;
   instPower: number;
   avgPower: number;
-  // History arrays for charting
   currentHistory: { timestamp: string; value: number; }[];
   avgCurrentHistory: { timestamp: string; value: number; }[];
   voltageHistory: { timestamp: string; value: number; }[];
   powerHistory: { timestamp: string; value: number; }[];
 }
 
-// Define the shape of the context object (MODIFIED)
+// MODIFIED: specificAvgPowerLoading has been removed from this interface
 interface DataContextType {
   metrics: Metrics;
   loading: boolean;
   error: string | null;
-  refreshData: (intervalHours?: number) => void; // Existing function
-  // NEW: States and function for specific average power consumption
+  refreshData: (intervalHours?: number) => void;
   specificAvgPower: number;
-  specificAvgPowerLoading: boolean;
   specificAvgPowerError: string | null;
   refreshSpecificAvgPower: (periodMinutes?: number) => void;
 }
 
-// Initial state for metrics (EXISTING - NO CHANGES HERE for existing metrics)
 const initialMetrics: Metrics = {
   current: 0,
   avgCurrent: 0,
@@ -44,38 +39,30 @@ const initialMetrics: Metrics = {
   powerHistory: []
 };
 
-// Create the React Context
 const DataContext = createContext<DataContextType>({
   metrics: initialMetrics,
   loading: true,
   error: null,
   refreshData: () => {},
-  // NEW: Initial values for specific average power
   specificAvgPower: 0,
-  specificAvgPowerLoading: true,
+  // MODIFIED: specificAvgPowerLoading removed from initial context value
   specificAvgPowerError: null,
   refreshSpecificAvgPower: () => {},
 });
 
-// Custom hook for convenient consumption of the DataContext
 export const useDataContext = () => useContext(DataContext);
 
-// DataProvider component that wraps your application and provides the data context
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [metrics, setMetrics] = useState<Metrics>(initialMetrics);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [currentInterval, setCurrentInterval] = useState<number>(24);
 
-  // NEW: States for specific average power consumption
   const [specificAvgPower, setSpecificAvgPower] = useState<number>(0);
-  const [specificAvgPowerLoading, setSpecificAvgPowerLoading] = useState<boolean>(true);
+  // MODIFIED: specificAvgPowerLoading state declaration removed
   const [specificAvgPowerError, setSpecificAvgPowerError] = useState<string | null>(null);
-  const [currentSpecificAvgPeriod, setCurrentSpecificAvgPeriod] = useState<number>(5); // Default to 5 minutes
+  const [currentSpecificAvgPeriod, setCurrentSpecificAvgPeriod] = useState<number>(5);
 
-  /**
-   * Function to fetch and refresh the sensor data from the backend (EXISTING).
-   */
   const refreshData = async (intervalHours: number = currentInterval) => {
     setLoading(true);
     setError(null);
@@ -93,14 +80,10 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     }
   };
 
-  /**
-   * NEW: Function to fetch and refresh the specific average power consumption.
-   * @param periodMinutes Optional. The number of minutes for the average calculation.
-   */
   const refreshSpecificAvgPower = async (periodMinutes: number = currentSpecificAvgPeriod) => {
-    setSpecificAvgPowerLoading(true);
+    // MODIFIED: setSpecificAvgPowerLoading(true) call removed
     setSpecificAvgPowerError(null);
-    setCurrentSpecificAvgPeriod(periodMinutes); // Update the state with the new period
+    setCurrentSpecificAvgPeriod(periodMinutes);
 
     try {
       const avgPower = await fetchSpecificAveragePower(periodMinutes);
@@ -108,33 +91,33 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     } catch (err: any) {
       console.error("Failed to refresh specific average power:", err);
       setSpecificAvgPowerError(err.message || "An unknown error occurred while fetching specific average power.");
-      setSpecificAvgPower(0); // Reset or show default on error
+      setSpecificAvgPower(0);
     } finally {
-      setSpecificAvgPowerLoading(false);
+      // MODIFIED: setSpecificAvgPowerLoading(false) call removed
     }
   };
 
-  // useEffect hook to handle initial data load and periodic refreshing for main dashboard metrics
+  // useEffect hook for main dashboard metrics
   useEffect(() => {
-    refreshData(currentInterval); // Initial load
+    refreshData(currentInterval);
 
     const intervalId = setInterval(() => {
       refreshData(currentInterval);
     }, 2000);
 
     return () => clearInterval(intervalId);
-  }, [currentInterval]); // Only re-run if currentInterval changes
+  }, [currentInterval]);
 
-  // NEW: useEffect hook for the specific average power consumption
+  // useEffect hook for the specific average power consumption
   useEffect(() => {
-    refreshSpecificAvgPower(currentSpecificAvgPeriod); // Initial load for specific average
+    refreshSpecificAvgPower(currentSpecificAvgPeriod);
 
     const avgIntervalId = setInterval(() => {
       refreshSpecificAvgPower(currentSpecificAvgPeriod);
-    }, 2000); // Refresh every 2 seconds (adjust as needed)
+    }, 2000);
 
     return () => clearInterval(avgIntervalId);
-  }, [currentSpecificAvgPeriod]); // Only re-run if currentSpecificAvgPeriod changes
+  }, [currentSpecificAvgPeriod]);
 
   return (
     <DataContext.Provider value={{
@@ -142,9 +125,8 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       loading,
       error,
       refreshData,
-      // NEW: Provide specific average power states and function
       specificAvgPower,
-      specificAvgPowerLoading,
+      // MODIFIED: specificAvgPowerLoading removed from provider value
       specificAvgPowerError,
       refreshSpecificAvgPower
     }}>
