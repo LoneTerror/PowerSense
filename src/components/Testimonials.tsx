@@ -16,43 +16,43 @@ interface TestimonialProps {
 
 const testimonials: TestimonialProps[] = [
   {
-    image: "https://cdn.discordapp.com/avatars/859489780055801896/032edd99be358e55498dc25b49dbaf29.png?size=4096", // Placeholder image
-    name: "Anilabh",
-    userName: "@devilsbell",
+    image: "https://i.postimg.cc/KcM7DxLJ/boy-1.png", // Placeholder image
+    name: "Ethan Carter",
+    userName: "@EthanC",
     comment: "PowerSense has completely transformed how I view my electricity consumption. The real-time data is incredibly insightful!",
   },
   {
-    image: "https://cdn.discordapp.com/avatars/836982978549907487/661965a1a17bdd8a1cda83f4e38e2912.png?size=4096", // Placeholder image
-    name: "Rishikesh",
-    userName: "@hiori",
-    comment:
-    "The dashboard is so user-friendly and easy to understand. I love being able to see my historical data and make informed decisions.",
-  },
-  {
-    image: "https://cdn.discordapp.com/avatars/757268391206715474/d0f150130a3f88a118e7a11dfcde55da.png?size=4096", // Placeholder image
-    name: "Midanka",
-    userName: "@R786",
-    comment:
-      "I was skeptical, but PowerSense genuinely helped me identify energy-wasting appliances. My bills have seen a noticeable drop!",
-  },
-  {
-    image: "https://cdn.discordapp.com/avatars/530782107069579265/240bd0b6260c0431e59a7cb7359dd0a0.png?size=4096", // Placeholder image
-    name: "Rupender",
-    userName: "@error69",
-    comment:
-      "Excellent support and a truly effective product. It's empowering to have such detailed control over my energy use.",
-  },
-  {
-    image: "https://cdn.discordapp.com/avatars/344093744670179361/d09545a6b444be1e4dc2f4d427d47dee.png?size=4096", // Placeholder image
-    name: "Jimmy",
-    userName: "@jimmy1327",
+    image: "https://i.postimg.cc/9fgPJfJN/girl-1.png", // Placeholder image
+    name: "Ava Martinez",
+    userName: "@AvaM",
     comment:
       "Knowing the estimated cost per kWh is a game-changer for budgeting. This is an essential tool for smart homes.",
   },
   {
-    image: "https://cdn.discordapp.com/avatars/1358491532432248995/5826243824477fbcd6d91e18192ec2c3.png?size=4096", // Placeholder image
-    name: "Smiley",
-    userName: "@smiley10100",
+    image: "https://i.postimg.cc/pLZJ5C8v/boy-2.png", // Placeholder image
+    name: "Noah Williams",
+    userName: "@NW_Finds",
+    comment:
+    "The dashboard is so user-friendly and easy to understand. I love being able to see my historical data and make informed decisions.",
+  },
+  {
+    image: "https://i.postimg.cc/QtRQZyLQ/girl-2.png", // Placeholder image
+    name: "Olivia Smith",
+    userName: "@LivSmith",
+    comment:
+      "Excellent support and a truly effective product. It's empowering to have such detailed control over my energy use.",
+  },
+  {
+    image: "https://i.postimg.cc/yN8XmRXZ/boy-3.png", // Placeholder image
+    name: "Benjamin Clark",
+    userName: "@BenClark_official",
+    comment:
+      "I was skeptical, but PowerSense genuinely helped me identify energy-wasting appliances. My bills have seen a noticeable drop!",
+  },
+  {
+    image: "https://i.postimg.cc/wMLhqQHS/girl-3.png", // Placeholder image
+    name: "Charlotte Jones",
+    userName: "@CharlotteJ",
     comment:
       "The average consumption metrics are very helpful for understanding trends. Highly recommend PowerSense to everyone!",
   },
