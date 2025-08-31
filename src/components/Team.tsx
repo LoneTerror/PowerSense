@@ -42,7 +42,7 @@ const teamList: TeamProps[] = [
     ],
   },
   {
-    imageUrl: "https://i.postimg.cc/XNCTkzwf/Prasun.png",
+    imageUrl: "https://i.postimg.cc/NjM5bkSB/Prasun-Neon-Orange-Themed.png",
     name: "Prasun Chakraborty",
     position: "BTech - IT | Gauhati University",
     socialNetworks: [
