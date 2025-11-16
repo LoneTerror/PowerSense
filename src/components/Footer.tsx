@@ -87,7 +87,7 @@ export const Footer = () => {
 
       <section className="container pb-14 text-center">
         <h3>
-          &copy; 2025 PowerSense page made by{" "}
+          &copy; 2025 PowerSense rights reserved by{" "}
           <a
             rel="noreferrer noopener"
             target="_blank"
