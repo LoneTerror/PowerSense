@@ -26,7 +26,7 @@ export const Hero = () => {
             rel="noreferrer noopener"
             href="https://github.com/LoneTerror"
             target="_blank"
-            className={`w-full md:w-1/3 ${buttonVariants({
+            className={`w-full md:w-1/2 ${buttonVariants({
               variant: "outline",
             })}`}
           >

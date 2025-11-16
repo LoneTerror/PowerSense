@@ -29,7 +29,7 @@ const teamList: TeamProps[] = [
     socialNetworks: [
       {
         name: "Github",
-        url: "https://github.com/",
+        url: "https://github.com/Pratiksha377?tab=repositories",
       },
       {
         name: "Linkedin",
@@ -42,7 +42,7 @@ const teamList: TeamProps[] = [
     ],
   },
   {
-    imageUrl: "https://i.postimg.cc/NjM5bkSB/Prasun-Neon-Orange-Themed.png",
+    imageUrl: "https://i.postimg.cc/6psBtj03/Prasun-b-w-with-highneck-tshirt-Upscaled.png",
     name: "Prasun Chakraborty",
     position: "BTech - IT | Gauhati University",
     socialNetworks: [
@@ -68,7 +68,7 @@ const teamList: TeamProps[] = [
 
 const guideList: TeamProps[] = [
   {
-    imageUrl: "https://i.imgur.com/4CIsZwR.jpeg",
+    imageUrl: "https://i.postimg.cc/ZKP21vs0/Kishore_sir.jpg",
     name: "Dr. Kishore Kashyap",
     position: "Assistant Professor, Dept of IT | GU",
     socialNetworks: [
