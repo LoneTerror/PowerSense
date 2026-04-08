@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 export default defineConfig({
   plugins: [react()],
   preview: {
-    allowedHosts: ["powersense.site"],
+    allowedHosts: ["powersense.top"],
   },
   resolve: {
     alias: {
