@@ -31,7 +31,7 @@ export interface SensorDataResponse {
  */
 export const fetchSensorData = async (intervalHours: number = 24): Promise<SensorDataResponse> => {
   try {
-    const response = await fetch(`https://backend.powersense.site/api/sensor-data?interval=${intervalHours}`);
+    const response = await fetch(`https://backend.powersense.top/api/sensor-data?interval=${intervalHours}`);
 
     if (!response.ok) {
       const errorData = await response.json();

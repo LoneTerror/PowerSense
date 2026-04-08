@@ -9,7 +9,7 @@
  */
 export const fetchSpecificAveragePower = async (periodMinutes: number): Promise<number> => {
   try {
-    const response = await fetch(`https://backend.powersense.site/api/avg-power-consumption?period=${periodMinutes}`);
+    const response = await fetch(`https://backend.powersense.top/api/avg-power-consumption?period=${periodMinutes}`);
 
     if (!response.ok) {
       const errorData = await response.json();
